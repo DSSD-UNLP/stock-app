@@ -1,7 +1,0 @@
-...
-[client]
-database: Dssd_stock_app,
-port: 3306
-user: root,
-password: julian,
-default-character-set = utf8
