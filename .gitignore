@@ -1,4 +1,6 @@
-stockProject/settings_secret.py
+# File with private settings to keep passwords safe
+stockProject/settings_secret.yml
+
 ### OSX ###
 .DS_Store
 .AppleDouble
