@@ -78,18 +78,7 @@ WSGI_APPLICATION = 'stockProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Dssd_stock_app',
-        'USER': 'root',
-        'PASSWORD': 'julian',
-        'HOST': 'localhost',
-        'OPTIONS': {
-            'charset': 'utf8mb4'
-        }
-    }
-}
+
 DATABASE_USER = config.get('DATABASE_USER')
 DATABASE_PASSWORD = config.get('DATABASE_PASSWORD')
 DATABASE_HOST = config.get('DATABASE_HOST')
