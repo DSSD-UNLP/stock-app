@@ -27,12 +27,12 @@ class ProductList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class ProductDetail(APIView):
 
+    """
+    API endpoint that allows types to be viewed or edited.
+    """
 class TypeList(APIView):
-     """
-     API endpoint that allows types to be viewed or edited.
-     """
+
     def get(self, request):
         types = Type.objects.all()
         serializer = TypeSerializer(types, many=True)
@@ -43,7 +43,7 @@ class TypeList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
