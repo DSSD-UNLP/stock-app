@@ -78,13 +78,18 @@ WSGI_APPLICATION = 'stockProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-
-DATABASE_USER = config.get('DATABASE_USER')
-DATABASE_PASSWORD = config.get('DATABASE_PASSWORD')
-DATABASE_HOST = config.get('DATABASE_HOST')
-DATABASE_PORT = config.get('DATABASE_PORT')
-DATABASE_ENGINE = config.get('DATABASE_ENGINE')
-DATABASE_NAME = config.get('DATABASE_NAME')
+DATABASES = {
+    'default': {
+        'ENGINE': config.get('DATABASE_ENGINE'),
+        'NAME': config.get('DATABASE_NAME'),
+        'USER': config.get('DATABASE_USER'),
+        'PASSWORD': config.get('DATABASE_PASSWORD'),
+        'HOST': config.get('DATABASE_HOST'),
+        'OPTIONS': {
+            'charset': 'utf8mb4'
+        }
+    }
+}
 
 
 # Password validation
