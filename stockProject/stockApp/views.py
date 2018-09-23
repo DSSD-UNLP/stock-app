@@ -4,7 +4,6 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.views.decorators.csrf import csrf_exempt
 
 class ProductList(APIView):
     """
@@ -21,7 +20,6 @@ class ProductList(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
     
-    @csrf_exempt
     def post(self, request, format=None):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
