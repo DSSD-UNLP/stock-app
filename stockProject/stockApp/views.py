@@ -43,6 +43,12 @@ class ProductDetail(APIView):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
 
+    def delete(self, request, pk, format=None):
+        product = get_object_or_404(Product, pk=pk)
+        serializer = ProductSerializer(product)
+        product.delete()
+        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT) 
+
     """
     API endpoint that allows types to be viewed or edited.
     """
