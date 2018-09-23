@@ -29,10 +29,26 @@ class ProductList(APIView):
 
 # class ProductDetail(APIView):
 
+class TypeList(APIView):
+     """
+     API endpoint that allows types to be viewed or edited.
+     """
+    def get(self, request):
+        types = Type.objects.all()
+        serializer = TypeSerializer(types, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, format=None):
+        serializer = TypeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-# class TypeViewSet(APIView):
-#     """
-#     API endpoint that allows types to be viewed or edited.
-#     """
-#     queryset = Type.objects.all()
-#     serializer_class = TypeSerializer
+
+
+
+
+
+
+
