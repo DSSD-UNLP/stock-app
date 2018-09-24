@@ -5,7 +5,7 @@ class ProductFilter(object):
 
     def products(self):
         if self.request.GET.get('name') != None:
-            self.queryset = self.queryset.filter(name__contains = self.request.GET.get('name'))
+            self.queryset = self.queryset.filter(name__contains = (self.request.GET.get('name')).strip())
         if self.request.GET.get('price') != None:
-            self.queryset = self.queryset.filter(cost_price= self.request.GET.get('price'))
+            self.queryset = self.queryset.filter(cost_price = self.request.GET.get('price'))
         return self.queryset.order_by('name')
