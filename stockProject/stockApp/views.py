@@ -25,6 +25,8 @@ class ProductList(APIView):
     def get(self, request):
         products = Product.objects.all()
         paginator = PageNumberPagination()
+        if request.GET.get('page_size') != None:
+            paginator.page_size = request.GET.get('page_size')
         page = paginator.paginate_queryset(products, request)
         serializer = ProductSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
@@ -57,14 +59,13 @@ class ProductDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-    """
-    API endpoint that allows types to be viewed or edited.
-    """
 class TypeList(APIView):
 
     def get(self, request):
         types = Type.objects.all()
         paginator = PageNumberPagination()
+        if request.GET.get('page_size') != None:
+            paginator.page_size = request.GET.get('page_size')
         page = paginator.paginate_queryset(types, request)
         serializer = TypeSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)
