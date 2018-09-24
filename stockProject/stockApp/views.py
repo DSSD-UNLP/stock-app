@@ -64,8 +64,10 @@ class TypeList(APIView):
 
     def get(self, request):
         types = Type.objects.all()
-        serializer = TypeSerializer(types, many=True)
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        page = paginator.paginate_queryset(types, request)
+        serializer = TypeSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = TypeSerializer(data=request.data)
