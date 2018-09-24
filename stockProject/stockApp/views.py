@@ -7,6 +7,7 @@ from rest_framework import status
 from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.pagination import PageNumberPagination
 import code
+from stockProject.stockApp.filter import ProductFilter
 
 """
 debugging lines
@@ -23,7 +24,7 @@ class ProductList(APIView):
 
     """
     def get(self, request):
-        products = Product.objects.all()
+        products = ProductFilter(Product.objects.all(), request).products()
         paginator = PageNumberPagination()
         if request.GET.get('page_size') != None:
             paginator.page_size = request.GET.get('page_size')
