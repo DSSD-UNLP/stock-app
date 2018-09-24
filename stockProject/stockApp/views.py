@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_list_or_404, get_object_or_404
+from rest_framework.pagination import PageNumberPagination
 import code
 
 """
@@ -21,13 +22,12 @@ class ProductList(APIView):
     /products/
 
     """
-    queryset = Product.objects.all().order_by('-name')
-    serializer_class = ProductSerializer
-
     def get(self, request):
         products = Product.objects.all()
-        serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        page = paginator.paginate_queryset(products, request)
+        serializer = ProductSerializer(page, many=True)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = ProductSerializer(data=request.data)
