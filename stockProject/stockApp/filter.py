@@ -2,14 +2,14 @@ class ProductFilter(object):
     def __init__(self, queryset, request):
         self.queryset = queryset
         self.request = request
+        self.valid_orders = ['name', 'sale_price', 'cost_price']
 
     def products(self):
-        order = 'name';
+        order = 'name'
         if self.request.GET.get('order') != None:
-            order = self.request.GET.get('order')
-        #Implementar de alguna manera un limite de cantidad de productos a devolver
-        #if self.request.GET.get('limit') != None:
-        #    self.queryset = self.queryset[:int(self.request.GET.get('limit'))]
+            tmp_order = self.request.GET.get('order')
+            if tmp_order in self.valid_orders:
+                order = tmp_order
         if self.request.GET.get('name') != None:
             self.queryset = self.queryset.filter(name__contains = (self.request.GET.get('name')).strip())
         if self.request.GET.get('cost_price_less') != None:
