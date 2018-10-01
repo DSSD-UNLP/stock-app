@@ -5,9 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_list_or_404, get_object_or_404
-from rest_framework.pagination import PageNumberPagination
 import code
 from stockProject.stockApp.filter import ProductFilter,TypeFilter
+from stockProject.stockApp.paginator_wrapper import StandardResultsSetPagination
 
 """
 debugging lines
@@ -25,11 +25,10 @@ class ProductList(APIView):
     """
     def get(self, request):
         products = ProductFilter(Product.objects.all(), request).products()
-        paginator = PageNumberPagination()
-        if request.GET.get('page_size') != None:
-            paginator.page_size = request.GET.get('page_size')
+        paginator       = StandardResultsSetPagination()    
         page = paginator.paginate_queryset(products, request)
         serializer = ProductSerializer(page, many=True)
+
         return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
@@ -64,9 +63,7 @@ class TypeList(APIView):
 
     def get(self, request):
         types = TypeFilter(Type.objects.all(),request).types()
-        paginator = PageNumberPagination()
-        if request.GET.get('page_size') != None:
-            paginator.page_size = request.GET.get('page_size')
+        paginator = StandardResultsSetPagination()
         page = paginator.paginate_queryset(types, request)
         serializer = TypeSerializer(page, many=True)
         return paginator.get_paginated_response(serializer.data)

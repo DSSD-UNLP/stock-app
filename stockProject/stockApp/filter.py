@@ -20,6 +20,8 @@ class ProductFilter(object):
             self.queryset = self.queryset.filter(sale_price__lte = self.request.GET.get('sale_price_less'))
         if self.request.GET.get('sale_price_more') != None:
             self.queryset = self.queryset.filter(sale_price__gte = self.request.GET.get('sale_price_more'))
+        if self.request.GET.get('type') != None:
+            self.queryset = self.queryset.filter(product_type = (self.request.GET.get('type')).strip())
         return self.queryset.order_by(order)
 
 class TypeFilter(object):

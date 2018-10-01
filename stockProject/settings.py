@@ -131,6 +131,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+#Rest Framework Pagination Service xD
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
