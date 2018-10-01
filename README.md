@@ -24,7 +24,6 @@ Dependiendo el motor de base de datos a utilizar, se deberá elegir entre difere
 
 Una vez que no queden dependencias por instalar (si es necesario otro paquete la consola lo indicará como feedback, junto con el comando necesario para instalarlo), hay que hacer las migraciones, para esto se ejecuta en orden:
 
-- python manage.py makemigrations
 - python manage.py migrate
 
 ## Guia de instalacion - Opcion Virtualenv
