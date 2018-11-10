@@ -58,7 +58,25 @@ class ProductDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    def patch(self,request,pk):
+        product = get_object_or_404(Product,pk=pk)
+        if product.stock > 0:
+            product.stock = product.stock - 1
+            product.save()
+            status_code    = status.HTTP_200_OK
+            status_message = "ok"
+            message        = "Se decremento el stock"
+        else:
+            status_code    = status.HTTP_400_BAD_REQUEST
+            status_message = "error"
+            message        = "No hay stock del producto"
 
+        response_message   = {
+            "status": status_message, 
+            "message":message
+        }
+
+        return Response(response_message, status = status_code)
 class TypeList(APIView):
 
     def get(self, request):
