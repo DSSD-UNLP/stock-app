@@ -58,7 +58,7 @@ class ProductDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-    def patch(self,request,pk):
+    def put(self,request,pk):
         product = get_object_or_404(Product,pk=pk)
         if product.stock > 0:
             product.stock = product.stock - 1
