@@ -91,3 +91,6 @@ local_settings.py
 
 .env
 db.sqlite3
+
+### Secret Settings
+settings_secret.yaml
